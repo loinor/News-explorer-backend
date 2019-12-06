@@ -51,7 +51,7 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-// app.use(auth);
+app.use(auth);
 
 app.use('/users', usersRoute);
 app.use('/articles', article);
