@@ -12,4 +12,6 @@ const errorPage = (req, res) => {
 
 router.get('/', findPage);
 
-module.exports = { router, article, usersRoute, errorPage };
+module.exports = {
+  router, article, usersRoute, errorPage,
+};

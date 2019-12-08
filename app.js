@@ -7,12 +7,15 @@ const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const joiObjectId = require('joi-objectid');
 const auth = require('./middlewares/auth');
+const mongoAddress = require('./Configuration/mongo-address');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 Joi.objectId = joiObjectId(Joi);
 
 const { login, createUser } = require('./controllers/userControler');
-const { router, article, usersRoute, errorPage } = require('./routes/router');
+const {
+  router, article, usersRoute, errorPage,
+} = require('./routes/router');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -70,7 +73,7 @@ app.use((err, req, res, next) => {
   next();
 });
 
-mongoose.connect('mongodb://localhost:27017/newsExplorer', {
+mongoose.connect(mongoAddress.MONGO_ADDRESS, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
