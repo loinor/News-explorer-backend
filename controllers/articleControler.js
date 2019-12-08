@@ -11,14 +11,18 @@ const getArticles = ((req, res, next) => {
 
 const createArticle = (req, res, next) => {
   const owner = req.user._id;
-  const { keyword, title, text, date, source, link, image } = req.body;
-  Article.create({ keyword, title, text, date, source, link, image, owner })
+  const {
+    keyword, title, text, date, source, link, image,
+  } = req.body;
+  Article.create({
+    keyword, title, text, date, source, link, image, owner,
+  })
     .then((article) => {
       res.send({ data: article });
     }).catch(next);
 };
 
-const deleteArticle = ((req, res) => {
+const deleteArticle = ((req, res, next) => {
   const { articleId } = req.params;
   const currentUser = req.user._id;
   Article.findById(articleId)
